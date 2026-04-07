@@ -22,6 +22,8 @@ jobs:
         with:
           bun-version: latest
 
+      - uses: denoland/setup-deno@v2
+
       - name: Install dependencies
         run: bun add jsr pubm@${{ inputs.pubm_version || github.event.client_payload.pubm_version || 'latest' }} @pubm/core@${{ inputs.pubm_version || github.event.client_payload.pubm_version || 'latest' }}
 
@@ -65,9 +67,9 @@ jobs:
         run: |
           for PKG in pubm-test-npm-jsr-core pubm-test-npm-jsr-utils; do
             BODY=$(curl -s "https://jsr.io/@syi0808/${PKG}/meta.json")
-          STATUS=$(echo "$BODY" | grep -c "$VERSION" || true)
+            STATUS=$(echo "$BODY" | grep -c "$VERSION" || true)
             if [ "$STATUS" = "0" ]; then
-              echo "::error::${PKG} not found on jsr (HTTP $STATUS)"
+              echo "::error::${PKG} version $VERSION not found on jsr"
               exit 1
             fi
             echo "${PKG} verified on jsr"
