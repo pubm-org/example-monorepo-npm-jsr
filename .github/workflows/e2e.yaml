@@ -22,7 +22,9 @@ jobs:
         with:
           bun-version: latest
 
-      - uses: denoland/setup-deno@v2
+
+      - name: Install jsr CLI
+        run: npm install -g jsr
 
       - name: Install pubm
         run: bun add pubm@${{ inputs.pubm_version || github.event.client_payload.pubm_version || 'latest' }} @pubm/core@${{ inputs.pubm_version || github.event.client_payload.pubm_version || 'latest' }}
