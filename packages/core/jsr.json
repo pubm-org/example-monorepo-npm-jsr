@@ -1,0 +1,5 @@
+{
+  "name": "@syi0808/pubm-test-npm-jsr-core",
+  "version": "0.0.1",
+  "exports": "./src/index.ts"
+}
