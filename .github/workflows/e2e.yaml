@@ -22,7 +22,6 @@ jobs:
         with:
           bun-version: latest
 
-
       - name: Install jsr CLI
         run: npm install -g jsr
 
