@@ -23,7 +23,7 @@ jobs:
           bun-version: latest
 
       - name: Install jsr CLI
-        run: npm install -g jsr
+        run: npm install -g jsr && chmod +x /usr/local/lib/node_modules/jsr/.download/*/linux/deno 2>/dev/null || true
 
       - name: Install pubm
         run: bun add pubm@${{ inputs.pubm_version || github.event.client_payload.pubm_version || 'latest' }} @pubm/core@${{ inputs.pubm_version || github.event.client_payload.pubm_version || 'latest' }}
