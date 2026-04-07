@@ -22,8 +22,16 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Install jsr CLI
-        run: npm install -g jsr && chmod +x /usr/local/lib/node_modules/jsr/.download/*/linux/deno 2>/dev/null || true
+      - uses: denoland/setup-deno@v2
+
+      - name: Install jsr CLI with deno binary
+        run: |
+          npm install -g jsr
+          JSR_DIR=$(npm root -g)/jsr/.download
+          DENO_BIN=$(which deno)
+          mkdir -p "$JSR_DIR/v2.6.7/linux"
+          cp "$DENO_BIN" "$JSR_DIR/v2.6.7/linux/deno"
+          chmod +x "$JSR_DIR/v2.6.7/linux/deno"
 
       - name: Install pubm
         run: bun add pubm@${{ inputs.pubm_version || github.event.client_payload.pubm_version || 'latest' }} @pubm/core@${{ inputs.pubm_version || github.event.client_payload.pubm_version || 'latest' }}
