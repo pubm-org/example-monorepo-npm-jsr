@@ -1,5 +1,6 @@
 {
   "name": "@syi0808/pubm-test-npm-jsr-utils",
   "version": "0.0.1",
-  "exports": "./src/index.ts"
+  "exports": "./src/index.ts",
+  "license": "MIT"
 }
