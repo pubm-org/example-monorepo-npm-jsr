@@ -66,7 +66,7 @@ jobs:
           for PKG in pubm-test-npm-jsr-core pubm-test-npm-jsr-utils; do
             BODY=$(curl -s "https://jsr.io/@syi0808/${PKG}/meta.json")
           STATUS=$(echo "$BODY" | grep -c "$VERSION" || true)
-            if [ "$STATUS" != "200" ]; then
+            if [ "$STATUS" = "0" ]; then
               echo "::error::${PKG} not found on jsr (HTTP $STATUS)"
               exit 1
             fi
